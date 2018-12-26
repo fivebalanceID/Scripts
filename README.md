@@ -20,8 +20,6 @@ After the MN is up and running, you need to configure the desktop wallet accordi
     7. Go to Masternodes tab -> "My Master nodes - Create"
     8. Add the following entry:
 
-    Alias Address Privkey TxHash Output_index
-
     Alias: MN1
     Address: VPS_IP:PORT
     Privkey: Masternode Private Key
