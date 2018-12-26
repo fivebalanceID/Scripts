@@ -29,6 +29,7 @@ testnet=1
 staking=1
 ``` 
 Save file fivebalance.conf and Reopen your wallet.
+
 3. Go to RECEIVE and create a New Address: **MN1**
 4. Send **1000000** **FBN** to **MN1**.
 5. Wait for 10 confirmations.
@@ -42,6 +43,7 @@ Save file fivebalance.conf and Reopen your wallet.
 * Privkey: **Masternode Private Key**
 * TxHash: **First value from Step 7**
 * Output index:  **Second value from Step 7**
+
 10. Save and close the file.
 11. Close the wallet and start it again. Make sure the wallet is unlocked.
 12.  Go to Masternodes tab -> "My Master nodes - start "
