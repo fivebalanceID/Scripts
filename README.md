@@ -4,8 +4,8 @@ Shell script to install a FBN Coin Masternode on a Linux server running Ubuntu 1
 This script will install FBN 1.1.0.0
 Installation:
 
-wget -q <a href="https://raw.githubusercontent.com/fivebalanceID/Scripts/master/testnet.sh">
-<p> bash testnet.sh
+wget -q https://raw.githubusercontent.com/fivebalanceID/Scripts/master/testnet.sh
+bash testnet.sh
 
 Desktop wallet setup
 
