@@ -5,7 +5,7 @@ This script will install FBN 1.1.0.0
 Installation:
 
 wget -q https://github.com/fivebalanceID/Scripts/blob/master/testnet.sh
-bash testnet.sh
+<p> bash testnet.sh
 
 Desktop wallet setup
 
