@@ -17,7 +17,7 @@ After the MN is up and running, you need to configure the desktop wallet accordi
 2. Close your wallet and open the Fivebalance Appdata folder. Its location depends on your OS.
 
 - **Windows:** Press Windows+R and write %appdata% - there, open the folder Bulwark.
-- **Linux:** Open ~/.bulwark/
+- **Linux:** Open ~/.fivebalance/
 
 In your appdata folder, open fivebalance.conf with a text editor and add a new line in this format to the bottom of the file:
 
