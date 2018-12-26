@@ -13,13 +13,12 @@ bash testnet.sh
 ## Desktop wallet setup
 
 After the MN is up and running, you need to configure the desktop wallet accordingly. Here are the steps for Windows Wallet
-1. Open the FBN Coin Desktop Wallet.
-2. Go to RECEIVE and create a New Address: **MN1**
+1. Download Destop Wallet [Fivebalance Desktop Wallet] (https://github.com/fivebalanceID/Wallet-FBN/blob/master/fivebalance-qt.zip) and Open the FBN Coin Desktop Wallet. 2. Go to RECEIVE and create a New Address: **MN1**
 3. Send **1000000** **FBN** to **MN1**.
 4. Wait for 10 confirmations.
 5. Go to **Help -> "Debug Window - Console"**
 6. Type the following command: **masternode outputs**
-7. Go to  ** Masternodes tab -> "My Master nodes - Create"
+7. Go to  **Masternodes tab -> "My Master nodes - Create"**
 8. Add the following entry:
 
 * Alias: **MN1**
