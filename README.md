@@ -48,9 +48,8 @@ Save file fivebalance.conf and Reopen your wallet.
 
 ## Usage:
 ```
-fbncd mnsync status
-fbncd getinfo
-fbncd masternode status
+fbncd getinfo #check Block sync status 
+fbncd masternode status #check your masternod status, if status 9 masternode working, if 2 not working, if 8 block still sync 
 ```
 
 
