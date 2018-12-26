@@ -1,5 +1,5 @@
 # FBN Coin
-Shell script to install a [Fivebalance Masternode Testnet](https://fivebalance.com) on a Linux server running Ubuntu 16.04. Use it on your own risk.  
+Shell script to install [Fivebalance Masternode Testnet](https://fivebalance.com) on a Linux server running Ubuntu 16.04. Use it on your own risk.  
 This script will install **FBN Testnet 1.0**
 
 ***
@@ -13,7 +13,8 @@ bash testnet.sh
 ## Desktop wallet setup
 
 After the MN is up and running, you need to configure the desktop wallet accordingly. Here are the steps for Windows Wallet
-1. Download Destop Wallet [Fivebalance Desktop Wallet] (https://github.com/fivebalanceID/Wallet-FBN/blob/master/fivebalance-qt.zip) and Open the FBN Coin Desktop Wallet. 2. Go to RECEIVE and create a New Address: **MN1**
+1. Download Destop Wallet [Fivebalance Desktop Wallet](https://github.com/fivebalanceID/Wallet-FBN/blob/master/fivebalance-qt.zip) and Open the FBN Coin Desktop Wallet. 
+2. Go to RECEIVE and create a New Address: **MN1**
 3. Send **1000000** **FBN** to **MN1**.
 4. Wait for 10 confirmations.
 5. Go to **Help -> "Debug Window - Console"**
