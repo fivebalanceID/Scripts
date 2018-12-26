@@ -11,7 +11,7 @@ COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='Fivebalance'
 COIN_PORT=4444
 RPC_PORT=4441
-
+apt-get -y install curl
 NODEIP=$(curl -s4 api.ipify.org)
 
 
