@@ -16,7 +16,7 @@ After the MN is up and running, you need to configure the desktop wallet accordi
 1. Download Destop Wallet [Fivebalance Desktop Wallet](https://github.com/fivebalanceID/Wallet-FBN/raw/master/fivebalance-qt.zip) and Open the FBN Coin Desktop Wallet. 
 2. Close your wallet and open the Fivebalance Appdata folder. Its location depends on your OS.
 
-- **Windows:** Press Windows+R and write %appdata% - there, open the folder Bulwark.
+- **Windows:** Press Windows+R and write %appdata% - there, open the folder Fivebalance.
 - **Linux:** Open ~/.fivebalance/
 
 In your appdata folder, open fivebalance.conf with a text editor and add a new line in this format to the bottom of the file:
