@@ -1,4 +1,4 @@
-FBN Coin
+FBN Coin Testnet Installer Script
 
 Shell script to install a FBN Coin Masternode on a Linux server running Ubuntu 16.04. Use it on your own risk.
 This script will install FBN 1.1.0.0
