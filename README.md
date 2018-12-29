@@ -5,8 +5,10 @@ This script will install **FBN Testnet 1.0**
 ***
 ## Installation:
 ```
-wget -q https://raw.githubusercontent.com/fivebalanceID/Scripts/master/testnet.sh
+wget https://raw.githubusercontent.com/fivebalanceID/Scripts/master/testnet.sh
 bash testnet.sh
+
+
 ```
 ***
 
