@@ -5,8 +5,8 @@ This script will install **FBN Testnet 1.0**
 ***
 ## Installation:
 ```
-wget https://raw.githubusercontent.com/fivebalanceID/Scripts/master/testnet.sh
-bash testnet.sh
+wget https://raw.githubusercontent.com/fivebalanceID/Scripts/master/fbn.sh
+bash fbn.sh
 
 
 ```
@@ -24,10 +24,11 @@ After the MN is up and running, you need to configure the desktop wallet accordi
 In your appdata folder, open fivebalance.conf with a text editor and add a new line in this format to the bottom of the file:
 
 ```text
-addnode=68.183.176.124
-addnode=107.173.102.22:4444
-addnode=107.172.60.49:4444
-testnet=1
+addnode=139.180.215.206:5555
+addnode=198.46.190.22:5555
+addnode=198.46.190.10:5555
+addnode=198.46.190.5:5555
+addnode=198.46.190.44:5555
 staking=1
 ``` 
 Save file fivebalance.conf and Reopen your wallet.
