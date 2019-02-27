@@ -3,7 +3,7 @@ Shell script to install [Fivebalance Masternode](https://fivebalance.com) on a L
 This script will install **FBN Masternode 1.0**
 
 ***
-## Installation:
+## Installation on VPS:
 ```
 wget https://raw.githubusercontent.com/fivebalanceID/Scripts/master/fbn.sh
 bash fbn.sh
@@ -15,7 +15,7 @@ bash fbn.sh
 ## Desktop wallet setup
 
 After the MN is up and running, you need to configure the desktop wallet accordingly. Here are the steps for Windows Wallet
-1. Download Destop Wallet [Fivebalance Desktop Wallet](https://github.com/fivebalanceID/Wallet-FBN/raw/master/fivebalance-qt.zip) and Open the FBN Coin Desktop Wallet. 
+1. Download Wallet [Fivebalance Wallet](https://github.com/fivebalanceID/Wallet-FBN) and Open the FBN Coin Desktop Wallet. 
 2. Close your wallet and open the Fivebalance Appdata folder. Its location depends on your OS.
 
 - **Windows:** Press Windows+R and write %appdata% - there, open the folder Fivebalance.
