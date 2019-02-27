@@ -24,11 +24,22 @@ After the MN is up and running, you need to configure the desktop wallet accordi
 In your appdata folder, open fivebalance.conf with a text editor and add a new line in this format to the bottom of the file:
 
 ```text
-addnode=139.180.215.206:5555
-addnode=198.46.190.22:5555
+addnode=23.226.138.247:5555
+addnode=23.226.138.246:5555
+addnode=23.226.138.253:5555
+addnode=107.175.255.15:5555
+addnode=107.175.255.158:5555
+addnode=107.175.255.155:5555
+addnode=192.227.204.207:5555
+addnode=192.227.204.212:5555
+addnode=192.227.204.209:5555
+addnode=192.227.204.208:5555
+addnode=192.227.204.210:5555
 addnode=198.46.190.10:5555
-addnode=198.46.190.5:5555
 addnode=198.46.190.44:5555
+addnode=198.46.190.5:5555
+addnode=192.227.204.211:5555
+addnode=34.73.7.5:5555
 staking=1
 ``` 
 Save file fivebalance.conf and Reopen your wallet.
