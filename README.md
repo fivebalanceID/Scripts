@@ -58,15 +58,18 @@ Save file fivebalance.conf and Reopen your wallet.
 * TxHash: **First value from Step 7**
 * Output index:  **Second value from Step 7**
 
-10. Save and close the file.
-11. Close the wallet and start it again. Make sure the wallet is unlocked.
-12.  Go to Masternodes tab -> "My Master nodes - start "
+10. Ok and Click Start until Masternode is Running 
 
 ## Usage:
 ```
 fbncd getinfo #check Block sync status 
 fbncd masternode status #check your masternod status, if status 9 masternode working, if 2 not working, if 8 block still sync 
 ```
+## Noted : 
+If you find Error " Failed to start masternodes, Error: Could not allocated Vin" 
+Solution is : 
+1. Click At Sent --> Coin Control Featurs ( Input ) - Find Wallet With Amount **1000000** Right Click Click Unlock Wallet..
+2. Go to Masternodes tab -> "My Master nodes - start " --> Start 
 
 
 
