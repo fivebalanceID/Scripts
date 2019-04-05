@@ -1,6 +1,6 @@
 # FBN Coin
 Shell script to install [Fivebalance Masternode](https://fivebalance.com) on a Linux server running Ubuntu 16.04. Use it on your own risk.  
-This script will install **FBN Masternode 1.0**
+This script will install **FBN Masternode 2.0**
 
 ***
 ## Installation on VPS:
