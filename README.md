@@ -40,9 +40,7 @@ startmasternode "alias" "mn1" "mn1"
 ```
 ***
 
-## Masternode update:
-If you are running an old Gin version, simply running the installer will update you to the latest version.
-***
+
 
 ## Usage:
 ```
