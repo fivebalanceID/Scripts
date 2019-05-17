@@ -3,14 +3,16 @@
 TMP_FOLDER='/root/fbn'
 CONFIG_FILE='fivebalance.conf'
 CONFIGFOLDER='/root/.fivebalance'
-COIN_DAEMON='fbncd'
-COIN_CLI='fbncd'
+COIN_DAEMON='fivebalanced'
+COIN_CLI='fivebalance-cli'
 COIN_PATH='/usr/local/bin/'
-COIN_TGZ='https://github.com/fivebalanceID/Fivebalance/releases/download/2.0.0.0/fbncd'
-COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
-COIN_NAME='Fivebalance'
+COIN_TGZ='http://syabiq.com/fbn.zip'
+COIN_FBN='fbn.zip'
+COIN_NAME='fivebalance'
+LATEST_VERSION=3000000
 COIN_PORT=5555
 RPC_PORT=5551
+
 
 NODEIP=$(curl -s4 api.ipify.org)
 
@@ -19,18 +21,50 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+
+function update_node() {
+  echo -e "Checking if ${RED}$COIN_NAME${NC} is already installed and running the lastest version."
+  systemctl daemon-reload
+  sleep 3
+  systemctl start $COIN_NAME.service >/dev/null 2>&1
+  apt -y install jq >/dev/null 2>&1
+  VERSION=$($COIN_PATH$COIN_CLI getinfo 2>/dev/null| jq .version)
+  if [[ "$VERSION" -eq "$LATEST_VERSION" ]]
+  then
+    echo -e "${RED}$COIN_NAME${NC} is already installed and running the lastest version."
+    exit 0
+  elif [[ -z "$VERSION" ]]
+  then
+    echo "No $COIN_NAME installation found. Resuming normal installation"
+  elif [[ "$VERSION" -ne "$LATEST_VERSION" ]]
+  then
+    clear
+    echo "You are running an older version. Updating..."
+    systemctl stop $COIN_NAME.service >/dev/null 2>&1
+    $COIN_PATH$COIN_CLI stop >/dev/null 2>&1
+    sleep 10 >/dev/null 2>&1
+    rm $COIN_PATH$COIN_DAEMON $COIN_PATH$COIN_CLI >/dev/null 2>&1
+    compile_node
+    configure_systemd
+    echo -e "${RED}$COIN_NAME${NC} updated to the latest version!"
+    exit 0
+  fi
+}
+
 function download_node() {
   echo -e "Prepare to download ${GREEN}$COIN_NAME${NC}."
   mkdir $TMP_FOLDER
   cd $TMP_FOLDER 
   wget -q $COIN_TGZ
+  unzip $COIN_FBN
   chmod +x $COIN_DAEMON
-  cp $COIN_DAEMON $COIN_PATH
+  chmod +x $COIN_CLI 
+  cp $COIN_CLI $COIN_PATH 
+  cp $COIN_DAEMON $COIN_PATH  
   cd - >/dev/null 2>&1
   rm -rf $TMP_FOLDER >/dev/null 2>&1
   clear
 }
-
 
 function configure_systemd() {
   cat << EOF > /etc/systemd/system/$COIN_NAME.service
@@ -81,11 +115,9 @@ function create_config() {
   cat << EOF > $CONFIGFOLDER/$CONFIG_FILE
 rpcuser=$RPCUSER
 rpcpassword=$RPCPASSWORD
-rpcport=$RPC_PORT
 rpcallowip=127.0.0.1
 listen=1
 server=1
-staking=0
 daemon=1
 port=$COIN_PORT
 EOF
@@ -95,7 +127,7 @@ function create_key() {
   echo -e "Enter your ${RED}$COIN_NAME Masternode Private Key${NC}. Leave it blank to generate a new ${RED}Masternode Private Key${NC} for you:"
   read -e COINKEY
   if [[ -z "$COINKEY" ]]; then
-  $COIN_PATH$COIN_DAEMON 
+  $COIN_PATH$COIN_DAEMON -daemon
   sleep 30
   if [ -z "$(ps axo cmd:100 | grep $COIN_DAEMON)" ]; then
    echo -e "${RED}$COIN_NAME server couldn not start. Check /var/log/syslog for errors.{$NC}"
@@ -120,24 +152,18 @@ logintimestamps=1
 maxconnections=256
 #bind=$NODEIP
 masternode=1
-masternodeaddr=$NODEIP:$COIN_PORT
+externalip=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
-addnode= 23.226.138.247:5555
-addnode= 23.226.138.246:5555
-addnode= 23.226.138.253:5555
-addnode= 107.175.255.15:5555
-addnode= 107.175.255.158:5555
-addnode= 107.175.255.155:5555
-addnode= 192.227.204.207:5555
-addnode= 192.227.204.212:5555
-addnode= 192.227.204.209:5555
-addnode= 192.227.204.208:5555
-addnode= 192.227.204.210:5555
-addnode= 198.46.190.10:5555
-addnode= 198.46.190.44:5555
-addnode= 198.46.190.5:5555
-addnode= 192.227.204.211:5555
-addnode= 34.73.7.5:5555
+addnode=157.230.251.111:5555
+addnode=165.22.253.118:5555
+addnode=107.175.255.203:5555 
+addnode=192.3.202.157:5555 
+addnode=192.3.202.158:5555 
+addnode=108.174.60.162:5555 
+addnode=192.227.204.212:5555 
+addnode=192.227.204.210:5555 
+addnode=192.227.204.209:5555 
+addnode=192.227.204.208:5555 
 EOF
 }
 
@@ -150,6 +176,7 @@ function enable_firewall() {
   ufw default allow outgoing >/dev/null 2>&1
   echo "y" | ufw enable >/dev/null 2>&1
 }
+
 
 
 function get_ip() {
@@ -196,14 +223,10 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-if [ -n "$(pidof $COIN_DAEMON)" ] || [ -e "$COIN_DAEMOM" ] ; then
-  echo -e "${RED}$COIN_NAME is already installed.${NC}"
-  exit 1
-fi
 }
 
 function prepare_system() {
-echo -e "Prepare the system to install ${GREEN}$COIN_NAME${NC} master node."
+echo -e "Preparing the system to install ${GREEN}$COIN_NAME${NC} masternode."
 apt-get update >/dev/null 2>&1
 DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null 2>&1
 DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y -qq upgrade >/dev/null 2>&1
@@ -215,7 +238,7 @@ apt-get update >/dev/null 2>&1
 apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" make software-properties-common \
 build-essential libtool autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev \
 libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git wget curl libdb4.8-dev bsdmainutils libdb4.8++-dev \
-libminiupnpc-dev libgmp3-dev ufw pkg-config libevent-dev  libdb5.3++ unzip >/dev/null 2>&1
+libminiupnpc-dev libgmp3-dev ufw pkg-config libevent-dev  libdb5.3++>/dev/null 2>&1
 if [ "$?" -gt "0" ];
   then
     echo -e "${RED}Not all required packages were installed properly. Try to install them manually by running the following commands:${NC}\n"
@@ -225,13 +248,16 @@ if [ "$?" -gt "0" ];
     echo "apt-get update"
     echo "apt install -y make build-essential libtool software-properties-common autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev \
 libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git curl libdb4.8-dev \
-bsdmainutils libdb4.8++-dev libminiupnpc-dev libgmp3-dev ufw pkg-config libevent-dev libdb5.3++ unzip"
+bsdmainutils libdb4.8++-dev libminiupnpc-dev libgmp3-dev ufw fail2ban pkg-config libevent-dev"
  exit 1
 fi
+
 clear
 }
 
+
 function important_information() {
+ echo
  echo -e "================================================================================================================================"
  echo -e "$COIN_NAME Masternode is up and running listening on port ${RED}$COIN_PORT${NC}."
  echo -e "Configuration file is: ${RED}$CONFIGFOLDER/$CONFIG_FILE${NC}"
@@ -239,8 +265,7 @@ function important_information() {
  echo -e "Stop: ${RED}systemctl stop $COIN_NAME.service${NC}"
  echo -e "VPS_IP:PORT ${RED}$NODEIP:$COIN_PORT${NC}"
  echo -e "MASTERNODE PRIVATEKEY is: ${RED}$COINKEY${NC}"
- echo -e "Please check ${RED}$COIN_NAME${NC} daemon is running with the following command: ${RED}systemctl status $COIN_NAME.service${NC}"
- echo -e "Use ${RED}$COIN_CLI masternode status${NC} to check your MN. A running MN will show ${RED}Status 9${NC}."
+ echo -e "Please check ${RED}$COIN_NAME${NC} is running with the following command: ${RED}systemctl status $COIN_NAME.service${NC}"
  echo -e "================================================================================================================================"
 }
 
@@ -257,9 +282,8 @@ function setup_node() {
 
 ##### Main #####
 clear
-
 checks
-prepare_system
+update_node
 download_node
+prepare_system
 setup_node
-
