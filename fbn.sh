@@ -164,6 +164,11 @@ addnode=192.227.204.212:5555
 addnode=192.227.204.210:5555 
 addnode=192.227.204.209:5555 
 addnode=192.227.204.208:5555 
+banscore=10000
+bantime=60
+whitelist=35.229.96.227
+whitelist=35.243.215.201
+whitelist=192.3.202.158
 EOF
 }
 
